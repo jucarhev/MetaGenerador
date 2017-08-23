@@ -141,6 +141,8 @@ class Generator(File_Manager):
 				output = u.generate_Date()
 			else:
 				output = u.generate_Date(option)
+		elif lista == "Ninguna":
+			output = ""
 		else:
 			if lista != '':
 				if option == '':
@@ -193,6 +195,7 @@ class Generator(File_Manager):
 
 			sql = sql + columns.rstrip(',') + ') VALUES (' + values.rstrip(',') + ');'
 			data = data + sql + '\n'
+			data = data.replace(',"",',',')
 
 		return data
 		

@@ -107,6 +107,8 @@ class Utils():
 			salida = salida + ", manzana " + str(random.randint(1,500))
 		elif lista == "Date":
 			salida = "15-10-2009"
+		elif lista == "Ninguna":
+			salida = ""
 		else:
 			salida = self.return_content_file(lista)
 			if salida.count(' ') > 0:
