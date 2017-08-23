@@ -1,13 +1,13 @@
-#Generador de datos
+# Generador de datos
 Generador de datos para mysql, permite crear 100 registros aleatorios para llenar tus tablas, pero a diferencia de otros este es extensible de una manera que puede ser modificado y mejorado. Antes de empezar debes configurar la conexion a tu base de datos en el menu preferences
-<a href="https://github.com/pacpac1992/MetaGenerador/blob/master/main.png" target="_blank"><img src=""/></a>
-##Menu
+<a href="" target="_blank"><img src="https://github.com/pacpac1992/MetaGenerador/blob/master/main.png"/></a>
+## Menu
 <ul>
     <li>File: Guarda los archivos si existen, crea un nuevo documento, abre archivos si existen, exporta a los formatos ya mencionados, cierra la aplicacion</li>
     <li>Preferences: Abre el menu de preferencias donde encontrara campos para excluir bases de datos o columnas de tablas</li>
     <li>Help: Muestra el archivo de acerca de</li>
 </ul>
-##Toolbar
+## Toolbar
 <ul>
     <li>Icono 1: Crear nuevo documento(lista de datos)</li>
     <li>Icono 2: Preferencias</li>
@@ -15,30 +15,22 @@ Generador de datos para mysql, permite crear 100 registros aleatorios para llena
     <li>Icono 4: Ayuda</li>
     <li>Icono 5: Cerrar</li>
 </ul>
-###Nuevo documento
+### Nuevo documento
 Permite crear archivos que seran utilizadas para rellenar las columnas seleccionadas
 
-###Preferencias
+### Preferencias
 En esta ventana podemos poner las bases de datos que no queremos que se muestren, estas pueden ser del sistema, tambien las columnas que no queremos que aparescan, como el id que es auto incrementable.
 
-<a href="" target="_blank"><img src="capture2.png"/></a>
-
-###Databases
+### Databases
 En este archivo solo definimos los datos escenciales para la conexion a la base de datos.
 
-<a href="" target="_blank"><img src="capture3.png"/></a>
-
-##Interface
+## Interface
 Si elegimos una base de datos y luego elegimos una tabla que corresponda a ella y presionamos el boton con icono de tabla, aparecera una ventana con la informacion de esa tabla de la base de datos, en esta se muestran los metadatos de cada columna.
 
-<a href="" target="_blank"><img src="capture4.png"/></a>
-
 Si ademas elegimos la columna de la tabla y un archivo del combo list podemos obtener los datos que se generaran y un ejemplo.
-<a href="" target="_blank"><img src="capture5.png"/></a>
-
 Es importante señalar que la caja de texto opciones permitira hacer algunas modificaciones a como saldra el datos.
 
-###Opciones
+### Opciones
 Por defecto ya vienen unas listas predeterminadas con opciones
 <ul>
 <li><strong>Email:</strong> Por defecto no tiene opciones</li>
