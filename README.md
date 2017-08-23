@@ -1,5 +1,6 @@
 # Generador de datos
-Generador de datos para mysql, permite crear 100 registros aleatorios para llenar tus tablas, pero a diferencia de otros este es extensible de una manera que puede ser modificado y mejorado. Antes de empezar debes configurar la conexion a tu base de datos en el menu preferences
+Generador de datos para mysql, permite crear 100 registros aleatorios para llenar tus tablas, pero a diferencia de otros este es extensible de una manera que puede ser modificado y mejorado. Antes de empezar debes configurar la conexion a tu base de datos en el menu preferences.
+
 <a href="" target="_blank"><img src="https://github.com/pacpac1992/MetaGenerador/blob/master/main.png"/></a>
 ## Menu
 <ul>
