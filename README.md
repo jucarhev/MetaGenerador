@@ -43,5 +43,15 @@ Por defecto ya vienen unas listas predeterminadas con opciones
 <li><strong>Date: </strong>por defecto sale una fecha con este formato dia-mes-año, si colocas r  en las opciones, retornara la diferencia entre la fecha actual y la fecha dada.</li>
 </ul>
 
+<h2>Requirements</h2>
+<ul>
+	<li>wxpython: python-wxgtk3.0</li>
+	<li>pymysql: PyMySQL</li>
+	<li>python: >= 2.6 or >= 3.3 </li>
+	<li>PyPy >= 4.0</li>
+</ul>
+
+<h2>License</h2>
+MetaGenerator is released under the MIT License. See LICENSE for more information.
 
 <small>Juankarlos.0304@gmail.com</small>

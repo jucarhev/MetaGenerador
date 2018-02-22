@@ -22,11 +22,11 @@ class GUI ( wx.Frame ):
 	array_data_preview_generate = []
 
 	def __init__( self, parent ):
-		wx.Frame.__init__ ( self, parent, id = wx.ID_ANY, title = u"Generador", pos = wx.DefaultPosition, size = wx.Size( 512,422 ), style = wx.DEFAULT_FRAME_STYLE|wx.TAB_TRAVERSAL )
+		wx.Frame.__init__ ( self, parent, id = wx.ID_ANY, title = u"Generador", pos = wx.DefaultPosition, size = wx.Size( 522,432 ), style = wx.DEFAULT_FRAME_STYLE|wx.TAB_TRAVERSAL )
 		favicon = wx.Icon('src/icon/notebook.png',wx.BITMAP_TYPE_PNG, 16,16)
 		self.SetIcon(favicon)
 		self.gui()
-		self.SetSize((600,530))
+		self.SetSize((620,530))
 		self.SetTitle("Generate Data")
 		self.Centre()
 		self.Show()
@@ -139,7 +139,7 @@ class GUI ( wx.Frame ):
 		self.cbo_list = wx.ComboBox( self, wx.ID_ANY, u"Ninguna", wx.DefaultPosition, wx.DefaultSize, cbo_listChoices, 0 )
 		bSizer6.Add( self.cbo_list, 0, wx.ALIGN_CENTER_VERTICAL|wx.ALL, 5 )
 		
-		self.txt_config = wx.TextCtrl( self, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.txt_config = wx.TextCtrl( self, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, (200,30), 0 )
 		bSizer6.Add( self.txt_config, 0, wx.ALL, 5 )
 		
 		self.btn_help_list = wx.BitmapButton( self, wx.ID_ANY, wx.Bitmap( u"src/icon/info16x16.png", wx.BITMAP_TYPE_ANY ), wx.DefaultPosition, wx.DefaultSize, wx.BU_AUTODRAW )
@@ -676,7 +676,7 @@ class export_dialog ( wx.Dialog ):
 		bSizer17 = wx.BoxSizer( wx.VERTICAL )
 		
 		self.txt_export = wx.TextCtrl( self, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.Size( -1,300 ), wx.TE_MULTILINE )
-		bSizer17.Add( self.txt_export, 0, wx.ALL|wx.EXPAND, 5 )
+		bSizer17.Add( self.txt_export, 1, wx.ALL|wx.EXPAND, 5 )
 		
 		
 		self.SetSizer( bSizer17 )
