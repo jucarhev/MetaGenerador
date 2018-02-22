@@ -37,39 +37,6 @@ class GUI ( wx.Frame ):
 	def gui(self):
 		self.SetSizeHintsSz( wx.DefaultSize, wx.DefaultSize )
 		
-		self.menubar = wx.MenuBar( 0 )
-		self.file_menu = wx.Menu()
-		self.file_menu_export = wx.MenuItem( self.file_menu, wx.ID_ANY, u"Export", wx.EmptyString, wx.ITEM_NORMAL )
-		self.file_menu.AppendItem( self.file_menu_export )
-		
-		self.file_menu_newlist = wx.MenuItem( self.file_menu, wx.ID_ANY, u"New list", wx.EmptyString, wx.ITEM_NORMAL )
-		self.file_menu.AppendItem( self.file_menu_newlist )
-		
-		self.file_menu_close = wx.MenuItem( self.file_menu, wx.ID_ANY, u"Close", wx.EmptyString, wx.ITEM_NORMAL )
-		self.file_menu.AppendItem( self.file_menu_close )
-		
-		self.menubar.Append( self.file_menu, u"&File" ) 
-		
-		self.edit_menu = wx.Menu()
-		self.edit_menu_preferences = wx.MenuItem( self.edit_menu, wx.ID_ANY, u"Preferences", wx.EmptyString, wx.ITEM_NORMAL )
-		self.edit_menu.AppendItem( self.edit_menu_preferences )
-		
-		self.edit_menu_database = wx.MenuItem( self.edit_menu, wx.ID_ANY, u"Databas conenction", wx.EmptyString, wx.ITEM_NORMAL )
-		self.edit_menu.AppendItem( self.edit_menu_database )
-		
-		self.edit_menu_list = wx.MenuItem( self.edit_menu, wx.ID_ANY, u"list", wx.EmptyString, wx.ITEM_NORMAL )
-		self.edit_menu.AppendItem( self.edit_menu_list )
-		
-		self.menubar.Append( self.edit_menu, u"&Edit" ) 
-		
-		self.help_menu = wx.Menu()
-		self.help_menu_about = wx.MenuItem( self.help_menu, wx.ID_ANY, u"About", wx.EmptyString, wx.ITEM_NORMAL )
-		self.help_menu.AppendItem( self.help_menu_about )
-		
-		self.menubar.Append( self.help_menu, u"Help" ) 
-		
-		self.SetMenuBar( self.menubar )
-		
 		self.toolbar = self.CreateToolBar( wx.TB_HORIZONTAL, wx.ID_ANY ) 
 		self.tool_new_document = self.toolbar.AddLabelTool( wx.ID_ANY, u"tool", wx.Bitmap( u"src/icon/new-file.png", wx.BITMAP_TYPE_ANY ), wx.NullBitmap, wx.ITEM_NORMAL, wx.EmptyString, wx.EmptyString, None ) 
 		
@@ -180,15 +147,6 @@ class GUI ( wx.Frame ):
 		self.Layout()
 		
 		self.Centre( wx.BOTH )
-
-		#Menu
-		self.Bind(wx.EVT_MENU, self.menu_file_close, self.file_menu_close)
-		self.Bind(wx.EVT_MENU, self.menu_file_export, self.file_menu_export)
-		self.Bind(wx.EVT_MENU, self.menu_file_newlist, self.file_menu_newlist)
-		self.Bind(wx.EVT_MENU, self.menu_edit_preferences ,self.edit_menu_preferences)
-		self.Bind(wx.EVT_MENU, self.menu_edit_databases ,self.edit_menu_database)
-		self.Bind(wx.EVT_MENU, self.menu_edit_menulist ,self.edit_menu_list)
-		self.Bind(wx.EVT_MENU, self.OnAboutBox, self.help_menu_about)
 
 		#ToolBar
 		self.Bind(wx.EVT_TOOL, self.menu_file_newlist, self.tool_new_document)
@@ -333,23 +291,32 @@ class GUI ( wx.Frame ):
 			if self.cbo_list.GetValue() == 'Email':
 				wx.MessageBox('Return email, Example: EWEXAN1458@company.com','Email', wx.OK | wx.ICON_INFORMATION)
 			elif self.cbo_list.GetValue() == 'Password':
-				content = '\nParams: 8,md5 / 8,sha1 / 8'
+				content = 'puede usarse sha1 o md5, en ambos casos la contraseña es "secret"';
+				content = content + '\nParams: None 	Return string(8) 	= YUCUXUPI'
+				content = content + '\nParams: 10 	Return string(10) 	= YUCUXUPISE'
+				content = content + '\nParams: 10,sha1 	Return string(10) 	= sha1(secret)'
 				wx.MessageBox('Return password, Example: '+content,'Password', wx.OK | wx.ICON_INFORMATION)
+
 			elif self.cbo_list.GetValue() == 'Random':
-				content = '\nParams: None 		Return random(0,100)\n'
-				content = content +'Params 0,200 		Return random(0,200)\n'
-				content = content +'Params 0,200,d 		Return random(0.0,200.0)'
+				content = '\nParams: None 		Return random(0,100) 		= 5\n'
+				content = content +'Params: 0,200 		Return random(0,200) 		= 123\n'
+				content = content +'Params: 0,200,d 		Return random(0.0,200.0) 	= 123.5'
 				wx.MessageBox('Return Random, Example: '+content,'Random', wx.OK | wx.ICON_INFORMATION)
+			
 			elif self.cbo_list.GetValue() == 'Feature':
-				content = '\nParams None / uno,dos,tres'
+				content = '\nParams example: one,two,three'
 				wx.MessageBox('Return Feature value of the array, Example: '+content,'Feature', wx.OK | wx.ICON_INFORMATION)
+			
 			elif self.cbo_list.GetValue() == 'Telephone':
 				content = '\nParams None / Home(01 ) '
 				wx.MessageBox('Return Telephone value of the array, Example: '+content,'Telephone', wx.OK | wx.ICON_INFORMATION)
+			
 			elif self.cbo_list.GetValue() == 'Direction':
 				content = '\nParams None / Home(01 ) '
 				wx.MessageBox('Return Direction value of the array, Example: '+content,'Direction', wx.OK | wx.ICON_INFORMATION)
+			
 			elif self.cbo_list.GetValue() == 'Date':
+				content = '\nParams None return 1990-02-3'
 				content = '\nParams r (Return differents with year) '
 				wx.MessageBox('Return Date value of the array, Example: '+content,'Date', wx.OK | wx.ICON_INFORMATION)
 

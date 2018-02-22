@@ -45,15 +45,15 @@ class Utils():
 		n = int(num) / 2
 		password = ''
 
-		for x in xrange(0,n):
+		for x in range(0,n):
 			password = password + random.choice(self.consonantes) + random.choice(self.vocales)
 		
 		if cifrado == "":
 			return password
 		elif cifrado == "sha1":
-			return hashlib.sha1(password).hexdigest()
+			return hashlib.sha1('secret').hexdigest()
 		elif cifrado == "md5":
-			return hashlib.md5(password).hexdigest()
+			return hashlib.md5('secret').hexdigest()
 
 	def generate_Date(self,rango = "1990,2000", dif = False,inte = ''):
 		mes = random.randint(1,12)
