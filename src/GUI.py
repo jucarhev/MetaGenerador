@@ -336,7 +336,9 @@ class GUI ( wx.Frame ):
 				content = '\nParams: 8,md5 / 8,sha1 / 8'
 				wx.MessageBox('Return password, Example: '+content,'Password', wx.OK | wx.ICON_INFORMATION)
 			elif self.cbo_list.GetValue() == 'Random':
-				content = '\nParams None / 0,200(star-end)'
+				content = '\nParams: None 		Return random(0,100)\n'
+				content = content +'Params 0,200 		Return random(0,200)\n'
+				content = content +'Params 0,200,d 		Return random(0.0,200.0)'
 				wx.MessageBox('Return Random, Example: '+content,'Random', wx.OK | wx.ICON_INFORMATION)
 			elif self.cbo_list.GetValue() == 'Feature':
 				content = '\nParams None / uno,dos,tres'
@@ -395,33 +397,10 @@ class GUI ( wx.Frame ):
 		array2 = gen.list_files_diccionary()
 		self.cbo_list.AppendItems(array1 + array2)
 
-
-	#
 	def OnAboutBox(self,evt):
-		description = "MetaGenerador\n Generador de datos para mysql en formatos\n"
-		description = description + "como MySQL\n"
-		description = description + "escrito en wxpython , python 3\n"
-
-		licence = "Esta biblioteca es software libre; puede redistribuirla\ny/o modificarla bajo los términos de la\n"
-		licence = licence + "Licencia Pública General Reducida de GNU tal como la publica la\n"
-		licence = licence + "Free SoftwareFoundation; ya sea la versión 2.1 de la licencia o \n"
-		licence = licence + "(según su criterio) cualquier versión posterior."
-
-		info = wx.AboutDialogInfo()
-
-		info.SetIcon(wx.Icon('src/icon/notebook128x128.png', wx.BITMAP_TYPE_PNG))
-		info.SetName('MetaGenerador')
-		info.SetVersion('0.5')
-		info.SetDescription(description)
-		info.SetCopyright('(C) 2006 - 2026 juankarlos.0304@gmail.com')
-		info.SetWebSite('http://www.pacpac1992.github.io')
-		info.SetLicence(licence)
-		info.AddDeveloper('JC juankarlos.0304@gmail.com')
-		info.AddDocWriter('JC juankarlos.0304@gmail.com')
-		info.AddArtist('Iconos de flaticons: www.flaticon.com \n Madebyoliver, Kirill Kazachek, Freepik \nLicence: Creative Commons BY 3.0')
-		info.AddTranslator('-----')
-
-		wx.AboutBox(info)
+		conecta = about(None)
+		conecta.ShowModal()
+		conecta.Destroy()
 
 ###########################################################################
 ## Class database_dialog
@@ -717,3 +696,45 @@ class description_table(wx.Dialog):
 			self.list.SetStringItem(index, 3, str(ar[3]))
 			self.list.SetStringItem(index, 4, str(ar[4]))
 			self.list.SetStringItem(index, 5, str(ar[5]))
+
+###########################################################################
+## Class about
+###########################################################################
+class about ( wx.Dialog ):
+	
+	def __init__( self, parent ):
+		wx.Dialog.__init__ ( self, parent, id = wx.ID_ANY, title = u"About", pos = wx.DefaultPosition, size = wx.Size( 450,439 ), style = wx.DEFAULT_DIALOG_STYLE )
+		
+		self.SetSizeHintsSz( wx.DefaultSize, wx.DefaultSize )
+		
+		bSizer17 = wx.BoxSizer( wx.VERTICAL )
+		
+		self.m_staticText10 = wx.StaticText( self, wx.ID_ANY, u"MetaGenerator", wx.DefaultPosition, wx.Size( -1,-1 ), wx.ALIGN_CENTRE )
+		self.m_staticText10.Wrap( -1 )
+		self.m_staticText10.SetFont( wx.Font( 28, wx.FONTFAMILY_SWISS, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_BOLD, False, "Sans" ) )
+		
+		bSizer17.Add( self.m_staticText10, 0, wx.ALIGN_CENTER_HORIZONTAL|wx.ALL, 5 )
+		
+		self.m_bitmap1 = wx.StaticBitmap( self, wx.ID_ANY, wx.Bitmap( u"src/icon//notebook128x128.png", wx.BITMAP_TYPE_ANY ), wx.DefaultPosition, wx.DefaultSize, 0 )
+		bSizer17.Add( self.m_bitmap1, 0, wx.ALIGN_CENTER_HORIZONTAL|wx.ALL, 5 )
+		
+		self.m_staticText13 = wx.StaticText( self, wx.ID_ANY, u"MetaGenerador Generador de datos para mysql\n en formatos como MySQL escrito en wxpython ,\n python 3", wx.DefaultPosition, wx.DefaultSize, wx.ALIGN_CENTRE )
+		self.m_staticText13.Wrap( -1 )
+		bSizer17.Add( self.m_staticText13, 0, wx.ALIGN_CENTER_HORIZONTAL|wx.ALL, 5 )
+		
+		self.m_staticText11 = wx.StaticText( self, wx.ID_ANY, u"juankarlos.0304@gmail.com", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.m_staticText11.Wrap( -1 )
+		bSizer17.Add( self.m_staticText11, 0, wx.ALIGN_CENTER_HORIZONTAL|wx.ALL, 5 )
+		
+		self.m_hyperlink1 = wx.HyperlinkCtrl( self, wx.ID_ANY, u"MetaGenerator", u"https://github.com/pacpac1992/MetaGenerador", wx.DefaultPosition, wx.DefaultSize, wx.HL_DEFAULT_STYLE )
+		bSizer17.Add( self.m_hyperlink1, 0, wx.ALIGN_CENTER_HORIZONTAL|wx.ALL, 5 )
+		
+		self.m_staticText12 = wx.StaticText( self, wx.ID_ANY, u"Iconos de flaticons: www.flaticon.com \n Madebyoliver, Kirill Kazachek, Freepik \nLicence: Creative Commons BY 3.0", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.m_staticText12.Wrap( -1 )
+		bSizer17.Add( self.m_staticText12, 0, wx.ALIGN_CENTER_HORIZONTAL|wx.ALL, 5 )
+		
+		
+		self.SetSizer( bSizer17 )
+		self.Layout()
+		
+		self.Centre( wx.BOTH )

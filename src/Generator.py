@@ -106,12 +106,21 @@ class Generator(File_Manager):
 				output = u.generate_password(array[0],array[1])
 			else:
 				output = u.generate_password(option)
+		# Generate random, integer or float
 		elif lista == "Random":
 			if option == "":
 				output = str(random.randint(1,1000))
-			elif option.count(",") > 0:
+			elif option.count(",") > 0 and option.count("d") == 0:
 				array = option.split(",")
 				output = str(random.randint(int(array[0]),int(array[1])))
+			elif option.count("d") > 0:
+				if option.count(",") == 0:
+					output = str(round(random.uniform(0.0, 10.9)))
+				else:
+					array = option.split(",")
+					a = float(array[0])
+					b = float(array[1])
+					output = str(round(random.uniform(a,b),1))
 			else:
 				output = str(random.randint(1,1000))
 		elif lista == "Feature":

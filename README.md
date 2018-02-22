@@ -8,6 +8,7 @@ Generador de datos para mysql, permite crear 100 registros aleatorios para llena
     <li>Preferences: Abre el menu de preferencias donde encontrara campos para excluir bases de datos o columnas de tablas</li>
     <li>Help: Muestra el archivo de acerca de</li>
 </ul>
+
 ## Toolbar
 <ul>
     <li>Icono 1: Crear nuevo documento(lista de datos)</li>
@@ -16,6 +17,7 @@ Generador de datos para mysql, permite crear 100 registros aleatorios para llena
     <li>Icono 4: Ayuda</li>
     <li>Icono 5: Cerrar</li>
 </ul>
+
 ### Nuevo documento
 Permite crear archivos que seran utilizadas para rellenar las columnas seleccionadas
 

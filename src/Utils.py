@@ -10,7 +10,7 @@ from File_Manager import *
 class Utils():	
 	
 	extension = ['@gmail.com','@hotmail.com','@yahoo.com','@company.com']
-	extras = ['_','1','2','3','4','5','6','7','8','9']
+	extras = ['0','1','2','3','4','5','6','7','8','9']
 	consonantes = ['B','C','D','F','G','H','J','K','L','M','N','P','Q','R','S','T','V','W','X','Y','Z']
 	vocales = ['A','E','I','O','U']
 
@@ -26,7 +26,22 @@ class Utils():
 
 		return mail
 
+	def generate_Code(self,num="12"):
+		code = ""
+		for x in range(0,int(num)):
+			for rango in range(1,3):
+				if rango == 1:
+					code = code + random.choice(self.extras)
+				elif rango == 2:
+					code = code + random.choice(self.consonantes)
+				elif rango == 3:
+					code = code + random.choice(self.vocales)
+		return code;
+
 	def generate_password(self,num="",cifrado=""):
+		if num == "":
+			num = "8"
+
 		n = int(num) / 2
 		password = ''
 
@@ -121,3 +136,4 @@ class Utils():
 		array_content_file = str(fm.file_open(file+'.txt')).split('\n')
 		dato = random.choice(array_content_file)
 		return dato
+
