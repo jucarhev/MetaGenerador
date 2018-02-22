@@ -165,6 +165,7 @@ class GUI ( wx.Frame ):
 		#Combos
 		self.cbo_databases.Bind(wx.EVT_COMBOBOX, self.combo_change_databases)
 		self.cbo_tables.Bind(wx.EVT_COMBOBOX, self.combo_change_tables)
+		self.cbo_list.Bind(wx.EVT_COMBOBOX, self.clean_options)
 
 		self.Bind(wx.EVT_LIST_ITEM_RIGHT_CLICK, self.onListBox, self.list_preview)
 	
@@ -178,6 +179,7 @@ class GUI ( wx.Frame ):
 		items = self.spin_number_items.GetValue()
 		gen = Generator()
 		if len(self.array_data_preview_generate) != 0:
+			n = len(self.array_data_preview_generate)
 			r = gen.create_mysql(self.array_data_preview_generate,items,self.cbo_tables.GetValue())
 			conecta = export_dialog(None,r)
 			conecta.ShowModal()
@@ -246,6 +248,10 @@ class GUI ( wx.Frame ):
 	#		Buttons Methods
 	#####################################
 	def preview_info(self,event):
+		if self.cbo_list.GetValue() == 'Date':
+			if self.txt_config.GetValue() == 'r':
+				wx.MessageBox("Date, no puede tener solo r, debe ser asi 1990,2000,r","Warning",wx.OK | wx.ICON_INFORMATION)
+
 		gen = Generator()
 
 		n = len(self.array_data_preview_generate)
@@ -341,6 +347,8 @@ class GUI ( wx.Frame ):
 		except Exception as e:
 			print e
 
+	def clean_options(self,evt):
+		self.txt_config.SetValue('')
 	#####################################
 	# 		Methods Utils
 	#####################################
@@ -360,7 +368,7 @@ class GUI ( wx.Frame ):
 	def start_file_list(self):
 		gen = Generator()
 		self.cbo_list.Clear()
-		array1 = ['Ninguna','Email','Password','Date','Random','Feature','Telephone','Direction']
+		array1 = ['Ninguna','Email','Password','Date','Random','Feature','Telephone','Direction','Code','Secuencia']
 		array2 = gen.list_files_diccionary()
 		self.cbo_list.AppendItems(array1 + array2)
 
@@ -630,10 +638,11 @@ class export_dialog ( wx.Dialog ):
 		
 		self.Centre( wx.BOTH )
 
+
+		content = content.replace(',"");',');')
+		content = content.replace(',,',',')
 		self.txt_export.SetValue(content)
-	
-	def __del__( self ):
-		pass
+
 	
 
 ###########################################################################

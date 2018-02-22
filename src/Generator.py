@@ -107,6 +107,8 @@ class Generator(File_Manager):
 			else:
 				output = u.generate_password(option)
 		# Generate random, integer or float
+		elif lista == "Code":
+			output = u.generate_Code(option)
 		elif lista == "Random":
 			if option == "":
 				output = str(random.randint(1,1000))
@@ -152,6 +154,8 @@ class Generator(File_Manager):
 				output = u.generate_Date(option)
 		elif lista == "Ninguna":
 			output = ""
+		elif lista == "Secuencia":
+			output = "/secuencia/"
 		else:
 			if lista != '':
 				if option == '':
@@ -195,12 +199,16 @@ class Generator(File_Manager):
 				if str(array2[1]).count("int") == 0 and str(array2[1]).count("double") == 0:
 					if str(array2[2]).count('_,_'):
 						values = values + '"' + str(array2[2]).replace('_,_','","') + '",'
+						values = values.replace('/secuencia/','"'+str(x+1)+'"')
 					elif str(array2[2]).count('-,'):
 						values = values + '"' + str(array2[2]).replace('-,','",') + ','
+						values = values.replace('/secuencia/','"'+str(x+1)+'"')
 					else:
 						values = values + '"' + str(array2[2]) + '",'
+						values = values.replace('/secuencia/','"'+str(x+1)+'"')
 				else:
 					values = values + str(array2[2]) + ','
+					values = values.replace('/secuencia/',str(x+1))
 
 			sql = sql + columns.rstrip(',') + ') VALUES (' + values.rstrip(',') + ');'
 			data = data + sql + '\n'

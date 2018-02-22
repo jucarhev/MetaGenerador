@@ -28,6 +28,10 @@ class Utils():
 
 	def generate_Code(self,num="12"):
 		code = ""
+		
+		if num == "":
+			num = "12"
+
 		for x in range(0,int(num)):
 			for rango in range(1,3):
 				if rango == 1:
@@ -56,36 +60,43 @@ class Utils():
 			return hashlib.md5('secret').hexdigest()
 
 	def generate_Date(self,rango = "1990,2000", dif = False,inte = ''):
-		mes = random.randint(1,12)
-		dia = random.randint(1,31)
+		try:
+			mes = random.randint(1,12)
+			dia = random.randint(1,31)
 
-		if mes == 4 or mes == 6 or mes == 8 or mes == 10:
-			if dia == 31:
-				dia = 30
+			if mes == 4 or mes == 6 or mes == 8 or mes == 10:
+				if dia == 31:
+					dia = 30
 
-		elif mes == 2:
-			if dia > 28:
-				dia = 28
+			elif mes == 2:
+				if dia > 28:
+					dia = 28
 
-		array = rango.split(",")
+			array = rango.split(",")
 
-		inicio = int(array[0])
-		fin = int(array[1])
+			inicio = int(array[0])
+			fin = int(array[1])
 
-		if inicio < fin:
-			anio = random.randint(inicio,fin)
-		else:
-			anio = random.randint(1990,2000)
-
-		year_now = date.today().year
-
-		if dif == False:
-			return str(anio) + "-" + str(mes) + "-" + str(dia)
-		else:
-			if inte == '':
-				return str(anio) + "-" + str(mes) + "-" + str(dia) + "_,_" + str(year_now - anio)
+			if inicio < fin:
+				anio = random.randint(inicio,fin)
 			else:
-				return str(anio) + "-" + str(mes) + "-" + str(dia) + "-," + str(year_now - anio)
+				anio = random.randint(1990,2000)
+
+			year_now = date.today().year
+
+			if dif == False:
+				return str(anio) + "-" + str(mes) + "-" + str(dia)
+			else:
+				if inte == '':
+					return str(anio) + "-" + str(mes) + "-" + str(dia) + "_,_" + str(year_now - anio)
+				else:
+					return str(anio) + "-" + str(mes) + "-" + str(dia) + "-," + str(year_now - anio)
+
+		except Exception as e:
+			if dif == False:
+				return "1990-02-20"
+			else:
+				return "1990-02-20_,_" + str(date.today().year - 1990)
 
 	def data_examples(self,lista,option=""):
 		salida = " "
@@ -97,6 +108,8 @@ class Utils():
 				salida = self.generate_password(array[0],array[1])
 			else:
 				salida = self.generate_password(option)
+		elif lista == "Code":
+			salida = "WE34EWR54H56H"
 		elif lista == "Random":
 			if option == "":
 				salida = str(random.randint(1,1000))
@@ -105,6 +118,8 @@ class Utils():
 				salida = str(random.randint(int(array[0]),int(array[1])))
 			else:
 				salida = str(random.randint(1,1000))
+		elif lista == "Secuencia":
+			salida = "Secuencia"
 		elif lista == "Feature":
 			if option == "":
 				salida = "[item1,item2,item3,item4,item5]"
