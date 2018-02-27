@@ -27,7 +27,7 @@ class GUI ( wx.Frame ):
 		self.SetIcon(favicon)
 		self.gui()
 		self.SetSize((620,530))
-		self.SetTitle("Generate Data")
+		self.SetTitle("MetaGenerador")
 		self.Centre()
 		self.Show()
 

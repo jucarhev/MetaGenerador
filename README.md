@@ -1,7 +1,7 @@
 # Generador de datos
 Generador de datos para mysql, permite crear 500 registros aleatorios para llenar tus tablas de mysql. Una caracteristica que diferencia a otros hasta ahora, es que puede añadirse datos en formas de lista, llamado diccionario del cual toma los datos de forma aleatoria.
 
-<a href="" target="_blank"><img src="main.png"/></a>
+<a href="" target="_blank"><img src="https://github.com/pacpac1992/MetaGenerador/blob/master/main.png"/></a>
 
 ## Toolbar
 <ul>
@@ -30,7 +30,7 @@ Es importante señalar que la caja de texto opciones permitira hacer algunas mod
 
 ## Ayuda
 selecciona una lista y preciona el icono info, y saldra un alert donde te mostrara ayuda, amenos que que sea una lista añadida.  
-<img src="ayuda.png"/>
+<img src="https://github.com/pacpac1992/MetaGenerador/blob/master/ayuda.png"/>
 
 <h2>Requirements</h2>
 <ul>
