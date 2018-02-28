@@ -685,7 +685,7 @@ class about ( wx.Dialog ):
 		
 		bSizer17 = wx.BoxSizer( wx.VERTICAL )
 		
-		self.m_staticText10 = wx.StaticText( self, wx.ID_ANY, u"MetaGenerator", wx.DefaultPosition, wx.Size( -1,-1 ), wx.ALIGN_CENTRE )
+		self.m_staticText10 = wx.StaticText( self, wx.ID_ANY, u"MetaGenerador", wx.DefaultPosition, wx.Size( -1,-1 ), wx.ALIGN_CENTRE )
 		self.m_staticText10.Wrap( -1 )
 		self.m_staticText10.SetFont( wx.Font( 28, wx.FONTFAMILY_SWISS, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_BOLD, False, "Sans" ) )
 		

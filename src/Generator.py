@@ -213,6 +213,7 @@ class Generator(File_Manager):
 			sql = sql + columns.rstrip(',') + ') VALUES (' + values.rstrip(',') + ');'
 			data = data + sql + '\n'
 			data = data.replace(',"",',',')
+			data = data.replace('""','"')
 
 		return data
 		
