@@ -9,6 +9,7 @@
 
 import wx
 import wx.xrc
+import wx.aui
 
 # Import class
 from Generator import *
@@ -26,7 +27,7 @@ class GUI ( wx.Frame ):
 		favicon = wx.Icon('src/icon/notebook.png',wx.BITMAP_TYPE_PNG, 16,16)
 		self.SetIcon(favicon)
 		self.gui()
-		self.SetSize((620,530))
+		self.SetSize((690,530))
 		self.SetTitle("MetaGenerador")
 		self.Centre()
 		self.Show()
@@ -37,8 +38,12 @@ class GUI ( wx.Frame ):
 	def gui(self):
 		self.SetSizeHintsSz( wx.DefaultSize, wx.DefaultSize )
 		
+		self.SetForegroundColour( wx.Colour( 000, 000, 000 ) )
+		self.SetBackgroundColour( wx.Colour( 255, 255, 255 ) )
+
+		#-------------> start toolbar
 		self.toolbar = self.CreateToolBar( wx.TB_HORIZONTAL, wx.ID_ANY ) 
-		self.tool_new_document = self.toolbar.AddLabelTool( wx.ID_ANY, u"tool", wx.Bitmap( u"src/icon/new-file.png", wx.BITMAP_TYPE_ANY ), wx.NullBitmap, wx.ITEM_NORMAL, wx.EmptyString, wx.EmptyString, None ) 
+		self.tool_new_document = self.toolbar.AddLabelTool( wx.ID_ANY, u"tool", wx.Bitmap( u"src/icon/new-file.png", wx.BITMAP_TYPE_ANY ), wx.NullBitmap, wx.ITEM_NORMAL,u"Create new list",wx.EmptyString, None ) 
 		
 		self.toolbar.AddSeparator()
 		
@@ -46,9 +51,9 @@ class GUI ( wx.Frame ):
 		
 		self.toolbar.AddSeparator()
 		
-		self.tool_export = self.toolbar.AddLabelTool( wx.ID_ANY, u"tool", wx.Bitmap( u"src/icon/export.png", wx.BITMAP_TYPE_ANY ), wx.NullBitmap, wx.ITEM_NORMAL, wx.EmptyString, wx.EmptyString, None ) 
+		#self.tool_export = self.toolbar.AddLabelTool( wx.ID_ANY, u"tool", wx.Bitmap( u"src/icon/export.png", wx.BITMAP_TYPE_ANY ), wx.NullBitmap, wx.ITEM_NORMAL, wx.EmptyString, wx.EmptyString, None ) 
 		
-		self.toolbar.AddSeparator()
+		#self.toolbar.AddSeparator()
 		
 		self.tool_preferences = self.toolbar.AddLabelTool( wx.ID_ANY, u"tool", wx.Bitmap( u"src/icon/settings.png", wx.BITMAP_TYPE_ANY ), wx.NullBitmap, wx.ITEM_NORMAL, wx.EmptyString, wx.EmptyString, None ) 
 		
@@ -61,10 +66,14 @@ class GUI ( wx.Frame ):
 		self.tool_close = self.toolbar.AddLabelTool( wx.ID_ANY, u"tool", wx.Bitmap( u"src/icon/power.png", wx.BITMAP_TYPE_ANY ), wx.NullBitmap, wx.ITEM_NORMAL, wx.EmptyString, wx.EmptyString, None ) 
 		
 		self.toolbar.Realize() 
+
+		#-------------> end toolbar
 		
 		bSizer4 = wx.BoxSizer( wx.VERTICAL )
 		
 		bSizer5 = wx.BoxSizer( wx.HORIZONTAL )
+
+		#-------------> start firts row
 		
 		self.m_staticText7 = wx.StaticText( self, wx.ID_ANY, u"Databases:", wx.DefaultPosition, wx.DefaultSize, 0 )
 		self.m_staticText7.Wrap( -1 )
@@ -85,14 +94,16 @@ class GUI ( wx.Frame ):
 		self.btn_describe_table = wx.BitmapButton( self, wx.ID_ANY, wx.Bitmap( u"src/icon/table.png", wx.BITMAP_TYPE_ANY ), wx.DefaultPosition, wx.DefaultSize, wx.BU_AUTODRAW )
 		bSizer5.Add( self.btn_describe_table, 0, wx.ALIGN_CENTER_VERTICAL|wx.ALL, 5 )
 		
-		combo_tipoChoices = [u"MySQL",u"PossGress",u"MongoDB",u"Oracle",u"SQLServer",u"JSon",u"XML"]
-		self.combo_tipo = wx.ComboBox( self, wx.ID_ANY, u"MySQL", wx.DefaultPosition, wx.DefaultSize, combo_tipoChoices, 0 )
-		bSizer5.Add( self.combo_tipo, 0, wx.ALL, 5 )
+		
 
 		bSizer4.Add( bSizer5, 0, wx.EXPAND, 5 )
+
+		#-------------> end firts row
 		
 		bSizer6 = wx.BoxSizer( wx.HORIZONTAL )
 		
+		#-------------> start second row
+
 		self.m_staticText9 = wx.StaticText( self, wx.ID_ANY, u"Column:", wx.DefaultPosition, wx.DefaultSize, 0 )
 		self.m_staticText9.Wrap( -1 )
 		bSizer6.Add( self.m_staticText9, 0, wx.ALIGN_CENTER_VERTICAL|wx.ALL, 5 )
@@ -114,26 +125,18 @@ class GUI ( wx.Frame ):
 		
 		self.btn_help_list = wx.BitmapButton( self, wx.ID_ANY, wx.Bitmap( u"src/icon/info16x16.png", wx.BITMAP_TYPE_ANY ), wx.DefaultPosition, wx.DefaultSize, wx.BU_AUTODRAW )
 		bSizer6.Add( self.btn_help_list, 0, wx.ALL, 5 )
+
+		self.btn_play = wx.Button( self, wx.ID_ANY, u"Run", wx.DefaultPosition, wx.DefaultSize, 0 )
+		bSizer6.Add( self.btn_play, 0, wx.ALL, 5 )
 		
 		
 		bSizer4.Add( bSizer6, 0, wx.EXPAND, 5 )
-		
-		bSizer7 = wx.BoxSizer( wx.HORIZONTAL )
 
-		self.spin_number_items = wx.SpinCtrl( self, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, wx.SP_ARROW_KEYS, 1, 500, 1 )
-		bSizer7.Add( self.spin_number_items, 0, wx.ALL, 5 )
-		
-		self.btn_play = wx.Button( self, wx.ID_ANY, u"Preview", wx.DefaultPosition, wx.DefaultSize, 0 )
-		bSizer7.Add( self.btn_play, 0, wx.ALL, 5 )
-		
-		self.btn_clean = wx.Button( self, wx.ID_ANY, u"Clean", wx.DefaultPosition, wx.DefaultSize, 0 )
-		bSizer7.Add( self.btn_clean, 0, wx.ALL, 5 )
-		
-		
-		bSizer4.Add( bSizer7, 0, wx.EXPAND, 5 )
-		
+		#-------------> end second row
+
 		bSizer8 = wx.BoxSizer( wx.VERTICAL )
 		
+		#-------------> list- table
 		self.list_preview = wx.ListCtrl( self, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.LC_REPORT )
 		self.list_preview.InsertColumn(0, 'Num', width=50)
 		self.list_preview.InsertColumn(1, 'Column', width=100)
@@ -142,38 +145,73 @@ class GUI ( wx.Frame ):
 		self.list_preview.InsertColumn(4, 'Example', wx.LIST_FORMAT_RIGHT, 220)
 		bSizer8.Add( self.list_preview, 1, wx.ALL|wx.EXPAND, 5 )
 		
-		
 		bSizer4.Add( bSizer8, 1, wx.ALL|wx.EXPAND, 5 )
+
+		bSizer9 = wx.BoxSizer( wx.HORIZONTAL )
+
+		self.spin_number_items = wx.SpinCtrl( self, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, wx.SP_ARROW_KEYS, 1, 500, 1 )
+		bSizer9.Add( self.spin_number_items, 0, wx.ALL, 5 )
+
+		combo_tipoChoices = [u"MySQL",u"PossGress",u"MongoDB",u"Oracle",u"SQLServer",u"JSon",u"XML"]
+		self.combo_tipo = wx.ComboBox( self, wx.ID_ANY, u"MySQL", wx.DefaultPosition, wx.DefaultSize, combo_tipoChoices, 0 )
+		bSizer9.Add( self.combo_tipo, 0, wx.ALL, 5 )
+
+		self.btn_generate_data = wx.Button( self, wx.ID_ANY, u"Generate", wx.DefaultPosition, wx.DefaultSize, 0 )
+		bSizer9.Add( self.btn_generate_data, 0, wx.ALL, 5 )
+
+		self.m_staticText15 = wx.StaticText( self, wx.ID_ANY, u"\t\t", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.m_staticText15.Wrap( -1 )
+		bSizer9.Add( self.m_staticText15, 0, wx.ALL, 5 )
+
+		self.btn_view_table_content = wx.Button( self, wx.ID_ANY, u"Insert into", wx.DefaultPosition, wx.DefaultSize, 0 )
+		bSizer9.Add( self.btn_view_table_content, 0, wx.ALL, 5 )
+
+		self.m_staticText14 = wx.StaticText( self, wx.ID_ANY, u"\t\t", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.m_staticText14.Wrap( -1 )
+		bSizer9.Add( self.m_staticText14, 0, wx.ALL, 5 )
+
+		self.btn_view_table_content = wx.Button( self, wx.ID_ANY, u"Select *", wx.DefaultPosition, wx.DefaultSize, 0 )
+		bSizer9.Add( self.btn_view_table_content, 0, wx.ALL, 5 )
+
+		bSizer4.Add( bSizer9, 0, wx.EXPAND, 5 )
+
+		#-------------> start Tab
+		self.m_auinotebook1 = wx.aui.AuiNotebook( self, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.aui.AUI_NB_DEFAULT_STYLE )
+		self.m_auinotebook1.AddPage(ver_table(self.m_auinotebook1), 'select * from')
+		self.m_auinotebook1.AddPage(ver_data(self.m_auinotebook1), 'Data')
+		bSizer4.Add( self.m_auinotebook1, 1, wx.EXPAND |wx.ALL, 5 )
 		
+		#-------------> end Tab
 		
 		self.SetSizer( bSizer4 )
 		self.Layout()
 		
 		self.Centre( wx.BOTH )
 
-		#ToolBar
+		#-------------> Events ToolBar
 		self.Bind(wx.EVT_TOOL, self.menu_file_newlist, self.tool_new_document)
 		self.Bind(wx.EVT_TOOL, self.menu_edit_databases, self.tool_database)
-		self.Bind(wx.EVT_TOOL, self.menu_file_export, self.tool_export)
+		#self.Bind(wx.EVT_TOOL, self.menu_file_export, self.tool_export)
 		self.Bind(wx.EVT_TOOL, self.menu_edit_preferences, self.tool_preferences)
 		self.Bind(wx.EVT_TOOL, self.OnAboutBox, self.tool_help)
 		self.Bind(wx.EVT_TOOL, self.menu_file_close, self.tool_close)
 
-		#Botones
+		#-------------> Events Buttons
 		self.btn_play.Bind(wx.EVT_BUTTON,self.preview_info)
-		self.btn_clean.Bind(wx.EVT_BUTTON,self.clean_info)
+		#self.btn_clean.Bind(wx.EVT_BUTTON,self.clean_info)
 		self.btn_describe_table.Bind(wx.EVT_BUTTON,self.describe_table_database)
 		self.btn_help_list.Bind(wx.EVT_BUTTON,self.help_list_description)
 
-		#Combos
+		#-------------> Events Combos
 		self.cbo_databases.Bind(wx.EVT_COMBOBOX, self.combo_change_databases)
 		self.cbo_tables.Bind(wx.EVT_COMBOBOX, self.combo_change_tables)
 		self.cbo_list.Bind(wx.EVT_COMBOBOX, self.clean_options)
 
+		#-------------> Events list
 		self.Bind(wx.EVT_LIST_ITEM_RIGHT_CLICK, self.onListBox, self.list_preview)
 	
 	#####################################
-	#			Methods Menu 			
+	#			Methods Menu, toolbar 			
 	#####################################
 	def menu_file_close(self, event):
 		self.Destroy()
@@ -717,3 +755,33 @@ class about ( wx.Dialog ):
 		self.Layout()
 		
 		self.Centre( wx.BOTH )
+
+class ver_table(wx.Panel):
+	def __init__(self, parent):
+		wx.Panel.__init__(self, parent=parent, id=wx.ID_ANY)
+		
+		sizer = wx.BoxSizer(wx.VERTICAL)
+
+		id=wx.NewId()
+		self.lista=wx.ListCtrl(self,id,style=wx.LC_REPORT|wx.SUNKEN_BORDER,pos=(0,0),size=(555,280))
+		sizer.Add(self.lista, 1, wx.EXPAND)
+		self.SetSizer(sizer)
+
+class ver_data(wx.Panel):
+	"""docstring for ClassName"""
+	def __init__(self, parent):
+		wx.Panel.__init__(self, parent=parent, id=wx.ID_ANY)
+		
+		self.SetSizeHintsSz( wx.DefaultSize, wx.DefaultSize )
+		
+		bSizer17 = wx.BoxSizer( wx.VERTICAL )
+		
+		self.txt_export = wx.TextCtrl( self, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.Size( -1,300 ), wx.TE_MULTILINE )
+		bSizer17.Add( self.txt_export, 1, wx.ALL|wx.EXPAND, 5 )
+		
+		
+		self.SetSizer( bSizer17 )
+		self.Layout()
+		
+		self.Centre( wx.BOTH )
+		
