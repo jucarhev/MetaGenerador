@@ -85,7 +85,10 @@ class GUI ( wx.Frame ):
 		self.btn_describe_table = wx.BitmapButton( self, wx.ID_ANY, wx.Bitmap( u"src/icon/table.png", wx.BITMAP_TYPE_ANY ), wx.DefaultPosition, wx.DefaultSize, wx.BU_AUTODRAW )
 		bSizer5.Add( self.btn_describe_table, 0, wx.ALIGN_CENTER_VERTICAL|wx.ALL, 5 )
 		
-		
+		combo_tipoChoices = [u"MySQL",u"PossGress",u"MongoDB",u"Oracle",u"SQLServer",u"JSon",u"XML"]
+		self.combo_tipo = wx.ComboBox( self, wx.ID_ANY, u"MySQL", wx.DefaultPosition, wx.DefaultSize, combo_tipoChoices, 0 )
+		bSizer5.Add( self.combo_tipo, 0, wx.ALL, 5 )
+
 		bSizer4.Add( bSizer5, 0, wx.EXPAND, 5 )
 		
 		bSizer6 = wx.BoxSizer( wx.HORIZONTAL )
