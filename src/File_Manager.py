@@ -4,6 +4,7 @@
 from subprocess import PIPE, Popen
 import os
 import random
+from os.path import expanduser
 
 class File_Manager():
 	
@@ -55,3 +56,26 @@ class File_Manager():
 			return listado
 		else:
 			return 'Error'
+
+	"""
+	================================================> Function since v1.0
+	"""
+	def home_path(self):
+		home = expanduser("~")
+		if os.path.exists(home+os.sep+'config'):
+			print(home + os.sep+'config')
+		else:
+			ruta = os.mkdir(home+os.sep+'config',0777)
+			os.mkdir(home+os.sep+'config'+os.sep+'diccionary',0777)
+			os.mkdir(home+os.sep+'config'+os.sep+'preferences',0777)
+
+			try:
+				f = open(home+'/config'+os.sep+'preferences'+os.sep+'conn.txt', "w")
+				archivo = f.write('localhost\nroot\nroot')
+				f.close()
+				d = open(home+''+os.sep+'config'+os.sep+'preferences'+os.sep+'preferences.txt', "w")
+				db_column_exclude = 'information_schema,mysql,phpmyadmin,sys,performance_schema\nid,created_at,updated_at'
+				archivo = d.write(db_column_exclude)
+				d.close()
+			except Exception as e:
+				print 'Error'

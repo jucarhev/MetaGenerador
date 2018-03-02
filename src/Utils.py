@@ -43,6 +43,7 @@ class Utils():
 		return code;
 
 	def generate_password(self,num="",cifrado=""):
+		"""deprecated: since v0.6"""
 		if num == "":
 			num = "8"
 
@@ -60,6 +61,7 @@ class Utils():
 			return hashlib.md5('secret').hexdigest()
 
 	def generate_Date(self,rango = "1990,2000", dif = False,inte = ''):
+		"""deprecated: since v0.6"""
 		try:
 			mes = random.randint(1,12)
 			dia = random.randint(1,31)
@@ -152,3 +154,75 @@ class Utils():
 		dato = random.choice(array_content_file)
 		return dato
 
+	"""
+	================================================> Function since v1.0
+	"""
+	def password_generate(self,*args):
+		"""
+		password_generate(*args): Generate password, encripted or not
+		params: tuple
+		content: number or string
+		"""
+		password = ""
+		
+		if len(args) == 0:
+			for x in range(0,8):
+				password = password + random.choice(self.consonantes) + random.choice(self.vocales)
+			return password
+		else:
+			for arg in args:
+				if arg.count("sha1") > 0:
+					return hashlib.sha1('secret').hexdigest()
+				if arg.count("md5") > 0:
+					return hashlib.md5('secret').hexdigest()
+				elif arg.isdigit():
+					for x in range(0,int(arg)):
+						password = password + random.choice(self.consonantes) + random.choice(self.vocales)
+					return password
+				else:
+					return self.password_generate()
+
+	def date_generate(self,*args):
+		ranges = "1990,2000"
+		difference = False
+
+		inicio = 1990
+		fin = 2000
+
+		# months and days
+		mes = random.randint(1,12)
+		dia = random.randint(1,31)
+
+		if mes == 4 or mes == 6 or mes == 8 or mes == 10:
+			if dia == 31:
+				dia = 30
+
+		elif mes == 2:
+			if dia > 28:
+				dia = 28
+
+		year_now = date.today().year
+
+		# validations
+		if len(args) == 0:
+			return str(random.randint(1990,2000)) + "-" + str(mes) + "-" + str(dia)
+		else:
+			for arg in args:
+				if arg.count(',') == 1:
+					array = arg.split(",")
+					inicio = int(array[0])
+					fin = int(array[1])
+				elif arg.count('r') == 1:
+					difference = True
+				else:
+					return self.date_generate()
+
+		if inicio < fin:
+			anio = random.randint(inicio,fin)
+		else:
+			anio = random.randint(1990,2000)
+
+		if difference == True:
+			return str(anio) + "-" + str(mes) + "-" + str(dia) + "_,_" + str(year_now - anio)
+		else:
+			return str(anio) + "-" + str(mes) + "-" + str(dia)
