@@ -107,9 +107,9 @@ class Utils():
 		elif lista == "Password":
 			if option.count(',')  > 0:
 				array = option.split(",")
-				salida = self.generate_password(array[0],array[1])
+				salida = self.password_generate(array[0],array[1])
 			else:
-				salida = self.generate_password(option)
+				salida = self.password_generate(option)
 		elif lista == "Code":
 			salida = "WE34EWR54H56H"
 		elif lista == "Random":
@@ -122,7 +122,7 @@ class Utils():
 				salida = str(random.randint(1,1000))
 		elif lista == "Secuencia":
 			salida = "Secuencia"
-		elif lista == "Feature":
+		elif lista == "Custom":
 			if option == "":
 				salida = "[item1,item2,item3,item4,item5]"
 			else:

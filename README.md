@@ -43,16 +43,16 @@ selecciona una lista y preciona el icono info, y saldra un alert donde te mostra
 
 ## Por hacer
 Cosas por hacer:  
-1.- Administrar los archivo  
-2.- permitir espacio en blanco dentro las lineas  
-3.- Insertar automáticamente en mysql  
-4.- Ver los registros nuevos  
-5.- Soportar otros gestores de base de datos  
-6.- Exportar a json,xml,etc  
-7.- Hacer un guardado de las formas de llenar, para usarlas como scripts rapidos  
-8.- Documentar el código(que flojera)  
-9.- Mejorar el archivo de ayuda, hacer un manual  
-10.- Hacer un ejecutable para windows  
+1.- Administrar los archivo. --------------------------------------------------------------->  
+2.- permitir espacio en blanco dentro las lineas. ------------------------------------------>  
+3.- Insertar automáticamente en mysql. -----------------------------------------------------> Ok  
+4.- Ver los registros nuevos. --------------------------------------------------------------> Ok  
+5.- Soportar otros gestores de base de datos. ---------------------------------------------->  
+6.- Exportar a json,xml,etc. --------------------------------------------------------------->  
+7.- Hacer un guardado de las formas de llenar, para usarlas como scripts rapidos. ---------->  
+8.- Documentar el código. ------------------------------------------------------------------>  
+9.- Mejorar el archivo de ayuda, hacer un manual. ------------------------------------------>  
+10.- Hacer un ejecutable para windows. ----------------------------------------------------->  
 
 
 

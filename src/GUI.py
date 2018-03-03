@@ -166,8 +166,8 @@ class GUI ( wx.Frame ):
 		self.m_staticText15.Wrap( -1 )
 		bSizer9.Add( self.m_staticText15, 0, wx.ALL, 5 )
 
-		self.btn_view_table_content = wx.Button( self, wx.ID_ANY, u"Insert into", wx.DefaultPosition, wx.DefaultSize, 0 )
-		bSizer9.Add( self.btn_view_table_content, 0, wx.ALL, 5 )
+		self.btn_insert_into = wx.Button( self, wx.ID_ANY, u"Insert into", wx.DefaultPosition, wx.DefaultSize, 0 )
+		bSizer9.Add( self.btn_insert_into, 0, wx.ALL, 5 )
 
 		self.m_staticText14 = wx.StaticText( self, wx.ID_ANY, u"\t\t", wx.DefaultPosition, wx.DefaultSize, 0 )
 		self.m_staticText14.Wrap( -1 )
@@ -204,6 +204,7 @@ class GUI ( wx.Frame ):
 		self.btn_help_list.Bind(wx.EVT_BUTTON,self.help_list_description)
 		self.btn_view_table_content.Bind(wx.EVT_BUTTON,self.select_table)
 		self.btn_generate_data.Bind(wx.EVT_BUTTON,self.tab_generate_data)
+		self.btn_insert_into.Bind(wx.EVT_BUTTON,self.insert_into)
 
 		#-------------> Events Combos
 		self.cbo_databases.Bind(wx.EVT_COMBOBOX, self.combo_change_databases)
@@ -356,9 +357,9 @@ class GUI ( wx.Frame ):
 				content = content +'Params: 0,200,d 		Return random(0.0,200.0) 	= 123.5'
 				wx.MessageBox('Return Random, Example: '+content,'Random', wx.OK | wx.ICON_INFORMATION)
 			
-			elif self.cbo_list.GetValue() == 'Feature':
+			elif self.cbo_list.GetValue() == 'Custom':
 				content = '\nParams example: one,two,three'
-				wx.MessageBox('Return Feature value of the array, Example: '+content,'Feature', wx.OK | wx.ICON_INFORMATION)
+				wx.MessageBox('Return Custom value of the array, Example: '+content,'Custom', wx.OK | wx.ICON_INFORMATION)
 			
 			elif self.cbo_list.GetValue() == 'Telephone':
 				content = '\nParams None / Home(01 ) '
@@ -416,7 +417,7 @@ class GUI ( wx.Frame ):
 	def start_file_list(self):
 		gen = Generator()
 		self.cbo_list.Clear()
-		array1 = ['Ninguna','Email','Password','Date','Random','Feature','Telephone','Direction','Code','Secuencia']
+		array1 = ['Ninguna','Email','Password','Date','Random','Custom','Telephone','Direction','Code','Secuencia']
 		array2 = gen.list_files_diccionary()
 		self.cbo_list.AppendItems(array1 + array2)
 
@@ -425,7 +426,7 @@ class GUI ( wx.Frame ):
 		conecta.ShowModal()
 		conecta.Destroy()
 	
-	def select_table(self,evt):
+	def select_table(self,evt=None):
 		if self.cbo_databases.GetValue() != 'Ninguna' and self.cbo_tables.GetValue() != 'Ninguna':
 			database = self.cbo_databases.GetValue()
 			table = self.cbo_tables.GetValue()
@@ -439,3 +440,39 @@ class GUI ( wx.Frame ):
 			r = gen.create_mysql(self.array_data_preview_generate,items,self.cbo_tables.GetValue())
 			
 			self.tabs.AddPage(ver_data(self.tabs,r), 'Data')
+
+	def insert_into(self,evt):
+		items = self.spin_number_items.GetValue()
+		gen = Generator()
+		registers = ''
+		if len(self.array_data_preview_generate) != 0:
+			n = len(self.array_data_preview_generate)
+			registers = gen.create_mysql(self.array_data_preview_generate,items,self.cbo_tables.GetValue())
+			registers = registers.replace(',"");',');')
+			registers = registers.replace(',,',',')
+			
+			self.guardando(registers)
+
+	def guardando(self,content):
+		gen = Generator()
+		db = gen.connection_server()
+		db.DB_NAME = self.cbo_databases.GetValue()
+
+		array = content.split('\n')
+		array.pop()
+
+		t = 0
+
+		try:
+			for i in array:
+				val = db.run_query(str(i).replace(',")','').replace(',"");',');').replace(',,',','))
+				if val == None:
+					t = t + 1
+			
+			if t != 0:
+				wx.MessageBox("Guardado Complete","Complete",wx.OK | wx.ICON_INFORMATION)
+			else:
+				wx.MessageBox("Ha ocurrido un error","Error",wx.OK | wx.ICON_INFORMATION)
+
+		except Exception as e:
+			wx.MessageBox(str(e),"Error",wx.OK | wx.ICON_INFORMATION)

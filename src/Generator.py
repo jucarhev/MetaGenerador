@@ -103,9 +103,9 @@ class Generator(File_Manager):
 		elif lista == "Password":
 			if option.count(',')  > 0:
 				array = option.split(",")
-				output = u.generate_password(array[0],array[1])
+				output = u.password_generate(array[0],array[1])
 			else:
-				output = u.generate_password(option)
+				output = u.password_generate(option)
 		# Generate random, integer or float
 		elif lista == "Code":
 			output = u.generate_Code(option)
@@ -125,7 +125,7 @@ class Generator(File_Manager):
 					output = str(round(random.uniform(a,b),1))
 			else:
 				output = str(random.randint(1,1000))
-		elif lista == "Feature":
+		elif lista == "Custom":
 			if option == "":
 				output = random.choice(['item1','item2','item3','item4','item5'])
 			else:
@@ -141,6 +141,14 @@ class Generator(File_Manager):
 			output = "Calle " + str(random.choice(u.consonantes)) + ", numero " + str(random.randint(1,1000))
 			output = output + ", manzana " + str(random.randint(1,500))
 		elif lista == "Date":
+			if option == '':
+				output = u.generate_Date()
+			elif option.count(' ') > 0:
+				array_option = option.split(' ')
+				output = u.generate_Date(array_option[0],array_option[1])
+			else:
+				output = u.generate_Date(option)
+			"""
 			if option.count(' ')>0:
 				array_option = option.split(' ')
 				output = u.generate_Date(array_option[0],True)
@@ -150,8 +158,8 @@ class Generator(File_Manager):
 				output = u.generate_Date('',True,'-,')
 			elif option == '':
 				output = u.generate_Date()
-			else:
-				output = u.generate_Date(option)
+			
+			"""
 		elif lista == "Ninguna":
 			output = ""
 		elif lista == "Secuencia":
