@@ -1,8 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-import sys, pymysql
-pymysql.install_as_MySQLdb()
+import sys, MySQLdb
 
 class DB_Manager():
 	""" Class DB_Manager
@@ -24,7 +23,7 @@ class DB_Manager():
 		try:
 			datos = [self.DB_HOST, self.DB_USER, self.DB_PASS, self.DB_NAME]
 			#conn = MySQLdb.connect(*datos)
-			conn = pymysql.connect(*datos)
+			conn = MySQLdb.connect(*datos)
 			cursor = conn.cursor()
 			cursor.execute(query)
 			if query.upper().startswith('SELECT'):
