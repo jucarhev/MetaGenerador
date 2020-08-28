@@ -5,9 +5,9 @@ import random
 from datetime import date
 import hashlib
 
-from Utils import *
-from DB_Manager import *
-from File_Manager import *
+from src.Utils import *
+from src.DB_Manager import *
+from src.File_Manager import *
 
 class Generator(File_Manager):
 	

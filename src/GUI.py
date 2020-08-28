@@ -11,7 +11,7 @@ import wx
 import wx.xrc
 
 # Import class
-from Generator import *
+from src.Generator import *
 
 ###########################################################################
 ## Class GUI
@@ -345,7 +345,7 @@ class GUI ( wx.Frame ):
 			self.cbo_columns.SetValue('Ninguna')
 			self.cbo_columns.AppendItems(gen.columns_list(self.cbo_databases.GetValue(),self.cbo_tables.GetValue()))
 		except Exception as e:
-			print e
+			print(e)
 
 	def clean_options(self,evt):
 		self.txt_config.SetValue('')
