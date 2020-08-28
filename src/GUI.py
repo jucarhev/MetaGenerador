@@ -265,7 +265,7 @@ class GUI ( wx.Frame ):
 			self.list_preview.DeleteAllItems()
 
 			for ar in self.array_data_preview_generate:
-				index = self.list_preview.InsertStringItem(sys.maxint, str(ar[0]))
+				index = self.list_preview.InsertStringItem(sys.maxsize, str(ar[0]))
 				self.list_preview.SetStringItem(index, 1, str(ar[1]))
 				self.list_preview.SetStringItem(index, 2, str(ar[2]))
 				self.list_preview.SetStringItem(index, 3, str(ar[3]))
@@ -275,7 +275,7 @@ class GUI ( wx.Frame ):
 		self.list_preview.DeleteAllItems()
 
 		for ar in self.array_data_preview_generate:
-			index = self.list_preview.InsertStringItem(sys.maxint, str(ar[0]))
+			index = self.list_preview.InsertStringItem(sys.maxsize, str(ar[0]))
 			self.list_preview.SetStringItem(index, 1, str(ar[1]))
 			self.list_preview.SetStringItem(index, 2, str(ar[2]))
 			self.list_preview.SetStringItem(index, 3, str(ar[3]))
@@ -666,7 +666,7 @@ class description_table(wx.Dialog):
 		rows = self.gen.query_model("SHOW COLUMNS FROM " + table,database)
 
 		for ar in rows:
-			index = self.list.InsertStringItem(sys.maxint, str(ar[0]))
+			index = self.list.InsertStringItem(sys.maxsize, str(ar[0]))
 			self.list.SetStringItem(index, 1, str(ar[1]))
 			self.list.SetStringItem(index, 2, str(ar[2]))
 			self.list.SetStringItem(index, 3, str(ar[3]))

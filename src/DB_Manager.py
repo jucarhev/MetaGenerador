@@ -1,12 +1,10 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-import sys, MySQLdb
+import sys
+import mysql.connector
 
-class DB_Manager():
-	""" Class DB_Manager
-		Connection to database mysql
-	"""
+class DB_Manager( ):
 
 	DB_HOST = 'localhost'
 	DB_USER = 'root'
@@ -19,43 +17,56 @@ class DB_Manager():
 		self.DB_PASS = passw
 		self.DB_NAME = db
 
-	def run_query(self,query=''):
+	def connection(self):
 		try:
-			datos = [self.DB_HOST, self.DB_USER, self.DB_PASS, self.DB_NAME]
-			#conn = MySQLdb.connect(*datos)
-			conn = MySQLdb.connect(*datos)
-			cursor = conn.cursor()
-			cursor.execute(query)
-			if query.upper().startswith('SELECT'):
-				data = cursor.fetchall()
-			elif query.upper().startswith('SHOW'):
-				data = cursor.fetchall()
-			else:
-				conn.commit()
-				data = None
-			
-			cursor.close()
-			conn.close()
+			self.connection = mysql.connector.connect(host=self.Host_Name,user=self.User_Name,password=self.Password,database=self.Database_Name)
+			self.cursor = self.connection.cursor()
+		except mysql.connector.Error as e:
+			return e
 
+	def close(self):
+		self.connection.close()
+		self.cursor.close()
+
+	def execute_sql(self, sql, database):
+		try:
+			self.connection = mysql.connector.connect(host=self.Host_Name,user=self.User_Name,password=self.Password,database=database)
+			self.cursor = self.connection.cursor()
+
+			self.cursor.execute(sql)
+			r = self.connection.commit()
+			self.close()
+			return r
+		except mysql.connector.Error as e:
+			return e
+
+	def return_data(self,sql,database=''):
+		try:
+			self.connection = mysql.connector.connect(host=self.DB_HOST,user=self.DB_USER,password=self.DB_PASS, database=database)
+			self.cursor = self.connection.cursor()
+			self.cursor.execute(sql)
+			data = self.cursor.fetchall()
+			
+			self.close()
 			return data
-		except Exception as e:
-			return 'Error: ' + str(e)
+		except mysql.connector.Error as e:
+			return e
 
 	def databases_list(self):
 		try:
-			array = self.run_query('SHOW DATABASES;')
+			array = self.return_data('SHOW DATABASES;','')
 			databases = []
 			for row in array:
 				databases.append(row[0])
 			return databases
 		except Exception as e:
-			return False
+			return e
 
 	def tables_list(self,database):
 		self.DB_NAME = database
 		try:
 			if self.DB_NAME != '':
-				array = self.run_query('SHOW TABLES;')
+				array = self.return_data('SHOW TABLES;', database)
 				databases = []
 				for row in array:
 					databases.append(row[0])
@@ -69,10 +80,17 @@ class DB_Manager():
 		self.DB_NAME = database
 		try:
 			query = "show columns from " + table
-			result = self.run_query(query)
+			result = self.return_data(query, database)
 			columns = []
 			for row in result:
 				columns.append(row[0]+" "+row[1])
 			return columns
 		except Exception as e:
 			return e
+
+"""
+con = Model('localhost','root','','')
+print( con.databases_list() )
+print( con.tables_list( 'test2' ) )
+print( con.columns_list( 'test2' , 'test1' ) )
+"""

@@ -11,12 +11,12 @@ class File_Manager():
 		try:
 			if ruta == '':
 				ruta = 'diccionary/'
-			f = open(ruta+file, "rw")
+			f = open(ruta+file, "r")
 			archivo = f.read()
 			f.close()
 			return archivo
 		except Exception as e:
-			return e
+			print(e)
 
 	def write_file(self,file,content,ruta="diccionary/"):
 		try:
@@ -42,16 +42,22 @@ class File_Manager():
 	
 	def file_lists(self):
 		ruta = os.getcwd()
-		nueva_ruta = os.chdir(ruta + '/diccionary')
 		
+		#os.listdir(".")
+		#nueva_ruta = os.chdir(ruta + '/diccionary')
+		"""
 		proceso = Popen(['ls'], stdout=PIPE, stderr=PIPE)
 		error_encontrado = proceso.stderr.read()
 		proceso.stderr.close()
 		listado = proceso.stdout.read()
 		proceso.stdout.close()
 		ruta = os.chdir(ruta)
+		"""
+		#ruta = os.chdir(ruta)
+		listado = os.listdir(ruta + "/diccionary")
 
-		if not error_encontrado:
-			return listado
-		else:
-			return 'Error'
+		return listado
+"""
+fm = File_Manager()
+print( fm.file_open('conn.txt','src/config/') )
+"""

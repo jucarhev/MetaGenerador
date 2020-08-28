@@ -16,9 +16,14 @@ class Generator(File_Manager):
 
 	def check_connect(self):
 		file_check = self.file_open('conn.txt','src/config/')
+		
 		array_data_connect_server =  file_check.split("\n")
+		
+		if len(array_data_connect_server) == 2:
+			array_data_connect_server.append('')
+
 		self.db = DB_Manager(array_data_connect_server[0],array_data_connect_server[1],array_data_connect_server[2],'')
-		test = self.db.run_query("SHOW DATABASES")
+		test = self.db.return_data("SHOW DATABASES")
 		if(test.count('Error: ')):
 			return test
 		else:
@@ -35,7 +40,9 @@ class Generator(File_Manager):
 		array_file_preferences = file_preferences.split('\n')
 		array_databases =  self.db.databases_list()
 		for row in str(array_file_preferences[0]).split(','):
-			array_databases.remove(row)
+			#print(row)
+			pass
+			#array_databases.remove(row)
 		return array_databases
 
 	def list_files_diccionary(self):

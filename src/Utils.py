@@ -152,3 +152,6 @@ class Utils():
 		dato = random.choice(array_content_file)
 		return dato
 
+
+	def line_error(self):
+		print("_______________________________________")
