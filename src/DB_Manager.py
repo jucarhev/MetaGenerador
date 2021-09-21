@@ -77,20 +77,18 @@ class DB_Manager( ):
 			return e
 
 	def columns_list(self,database,table):
-		self.DB_NAME = database
 		try:
 			query = "show columns from " + table
 			result = self.return_data(query, database)
 			columns = []
 			for row in result:
-				columns.append(row[0]+" "+row[1])
+				columns.append(str(row[0])+" "+str(row[1]).replace("b'","").replace("'",""))
 			return columns
 		except Exception as e:
 			return e
+	
 
 """
-con = Model('localhost','root','','')
-print( con.databases_list() )
-print( con.tables_list( 'test2' ) )
-print( con.columns_list( 'test2' , 'test1' ) )
+con = DB_Manager('localhost','root','carlos','')
+con.columns_list( 'blog' , 'contacts' )
 """

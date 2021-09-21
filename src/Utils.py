@@ -46,7 +46,7 @@ class Utils():
 		if num == "":
 			num = "8"
 
-		n = int(num) / 2
+		n = int(num) // 2
 		password = ''
 
 		for x in range(0,n):

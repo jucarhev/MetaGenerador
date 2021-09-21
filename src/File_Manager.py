@@ -11,7 +11,7 @@ class File_Manager():
 		try:
 			if ruta == '':
 				ruta = 'diccionary/'
-			f = open(ruta+file, "r")
+			f = open(ruta+file.lower(), "r")
 			archivo = f.read()
 			f.close()
 			return archivo
@@ -55,7 +55,6 @@ class File_Manager():
 		"""
 		#ruta = os.chdir(ruta)
 		listado = os.listdir(ruta + "/diccionary")
-
 		return listado
 """
 fm = File_Manager()

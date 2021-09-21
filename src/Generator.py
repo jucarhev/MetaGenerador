@@ -23,11 +23,11 @@ class Generator(File_Manager):
 			array_data_connect_server.append('')
 
 		self.db = DB_Manager(array_data_connect_server[0],array_data_connect_server[1],array_data_connect_server[2],'')
-		test = self.db.return_data("SHOW DATABASES")
-		if(test.count('Error: ')):
-			return test
-		else:
+		test = str(self.db.return_data("SHOW DATABASES"))
+		if isinstance( self.db.return_data("SHOW DATABASES"), list):
 			return True
+		else:
+			return test
 
 	def connection_server(self,database=''):
 		file_check = self.file_open('conn.txt','src/config/')
@@ -46,11 +46,10 @@ class Generator(File_Manager):
 		return array_databases
 
 	def list_files_diccionary(self):
-		list_file = str(self.fm.file_lists()).replace('.txt','')
-		array_file_list = list_file.split('\n')
-		array_file_list.pop()
-
-		return array_file_list
+		array1 = []
+		for row in self.fm.file_lists():
+			array1.append(row.replace('.txt','').capitalize())
+		return array1
 
 	def list_table_database(self,data):
 		return self.db.tables_list(data)
@@ -68,13 +67,14 @@ class Generator(File_Manager):
 					array_columns_table.pop(i)
 			i = i + 1
 
+		print(array_columns_table)
 		return array_columns_table
 
 	def query_model(self,query,database):
 		file_check = self.file_open('conn.txt','src/config/')
 		array_data_connect_server =  file_check.split("\n")
 		db_ = DB_Manager(array_data_connect_server[0],array_data_connect_server[1],array_data_connect_server[2],database)
-		return db_.run_query(query)
+		return db_.return_data(query,database)
 
 	def examples(self,lista,option):
 		u = Utils()
