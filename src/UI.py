@@ -88,10 +88,10 @@ class Generador ( wx.Frame ):
 		bSizer3.Add( self.m_staticText4, 0, wx.ALIGN_CENTER_VERTICAL|wx.ALL, 5 )
 
 		m_comboBox4Choices = []
-		self.cbo_list = wx.ComboBox( self, wx.ID_ANY, u"Ninguna", wx.DefaultPosition, wx.DefaultSize, m_comboBox4Choices, 0 )
+		self.cbo_list = wx.ComboBox( self, wx.ID_ANY, u"Ninguna", wx.DefaultPosition, wx.Size( 120,-1 ), m_comboBox4Choices, 0 )
 		bSizer3.Add( self.cbo_list, 0, wx.ALIGN_CENTER_VERTICAL|wx.ALL, 5 )
 
-		self.txt_config = wx.TextCtrl( self, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.txt_config = wx.TextCtrl( self, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.Size( 200,-1 ), 0 )
 		bSizer3.Add( self.txt_config, 0, wx.ALIGN_CENTER_VERTICAL|wx.ALL, 5 )
 
 		self.m_bpButton2 = wx.BitmapButton( self, wx.ID_ANY, wx.NullBitmap, wx.DefaultPosition, wx.DefaultSize, wx.BU_AUTODRAW|0 )
@@ -150,7 +150,7 @@ class Generador ( wx.Frame ):
 		conecta = database_dialog(None)
 		conecta.ShowModal()
 		conecta.Destroy()
-		#self.check_start()
+		self.check_start()
 
 	def menu_file_export(self,event):
 		items = self.spin_number_items.GetValue()
