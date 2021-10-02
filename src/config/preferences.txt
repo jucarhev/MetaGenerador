@@ -1,2 +1,0 @@
-information_schema,mysql,phpmyadmin,sys,performance_schema
-id,created_at,updated_at

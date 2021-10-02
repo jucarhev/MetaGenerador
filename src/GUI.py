@@ -246,8 +246,8 @@ class GUI ( wx.Frame ):
 
 	#####################################
 	#		Buttons Methods
-	#####################################
-	def preview_info(self,event):
+	#####################################7
+	def preview_info(self,event):#error 2
 		if self.cbo_list.GetValue() == 'Date':
 			if self.txt_config.GetValue() == 'r':
 				wx.MessageBox("Date, no puede tener solo r, debe ser asi 1990,2000,r","Warning",wx.OK | wx.ICON_INFORMATION)
@@ -256,6 +256,7 @@ class GUI ( wx.Frame ):
 
 		n = len(self.array_data_preview_generate)
 		if self.cbo_list.GetValue() != 'Ninguna' or self.cbo_columns.GetValue() != 'Ninguna':
+			print("aqui")
 			columna = str(self.cbo_columns.GetValue()).split(' ')
 			lista = self.cbo_list.GetValue()
 			example = gen.examples(lista,self.txt_config.GetValue())
@@ -431,11 +432,12 @@ class database_dialog ( wx.Dialog ):
 		self.Centre( wx.BOTH )
 
 		self.gen = Generator()
-		file_check = self.gen.file_open('conn.txt','src/config/')
-		array_data_connect_server =  file_check.split("\n")
-		self.txt_hostname.SetValue(array_data_connect_server[0])
-		self.txt_username.SetValue(array_data_connect_server[1])
-		self.txt_password.SetValue(array_data_connect_server[2])
+		with open('src/config/config.json') as file:
+			data = json.load(file)
+
+		self.txt_hostname.SetValue(data["conn"][0])
+		self.txt_username.SetValue(data["conn"][1])
+		self.txt_password.SetValue(data["conn"][2])
 
 		self.btn_save_connection.Bind(wx.EVT_BUTTON,self.save_config)
 		self.btn_test_connection.Bind(wx.EVT_BUTTON,self.test_config)

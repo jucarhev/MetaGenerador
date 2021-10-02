@@ -4,6 +4,7 @@
 import random
 from datetime import date
 import hashlib
+import json
 
 from src.Utils import *
 from src.DB_Manager import *
@@ -15,14 +16,10 @@ class Generator(File_Manager):
 		self.fm = File_Manager()
 
 	def check_connect(self):
-		file_check = self.file_open('conn.txt','src/config/')
-		
-		array_data_connect_server =  file_check.split("\n")
-		
-		if len(array_data_connect_server) == 2:
-			array_data_connect_server.append('')
+		with open('src/config/config.json') as file:
+			data = json.load(file)
 
-		self.db = DB_Manager(array_data_connect_server[0],array_data_connect_server[1],array_data_connect_server[2],'')
+		self.db = DB_Manager(data["conn"][0],data["conn"][1],data["conn"][2],'')
 		test = str(self.db.return_data("SHOW DATABASES"))
 		if isinstance( self.db.return_data("SHOW DATABASES"), list):
 			return True
@@ -30,19 +27,14 @@ class Generator(File_Manager):
 			return test
 
 	def connection_server(self,database=''):
-		file_check = self.file_open('conn.txt','src/config/')
-		array_data_connect_server =  file_check.split("\n")
-		self.db = DB_Manager(array_data_connect_server[0],array_data_connect_server[1],array_data_connect_server[2],database)
+		with open('src/config/config.json') as file:
+			data = json.load(file)
+		self.db = DB_Manager(data["conn"][0],data["conn"][1],data["conn"][2],database)
+
 		return self.db
 
 	def databases(self):
-		file_preferences = self.file_open('preferences.txt','src/config/')
-		array_file_preferences = file_preferences.split('\n')
 		array_databases =  self.db.databases_list()
-		for row in str(array_file_preferences[0]).split(','):
-			#print(row)
-			pass
-			#array_databases.remove(row)
 		return array_databases
 
 	def list_files_diccionary(self):
@@ -55,25 +47,25 @@ class Generator(File_Manager):
 		return self.db.tables_list(data)
 
 	def columns_list(self,data,table):
-		file_preferences = self.file_open('preferences.txt','src/config/')
-		array_file_preferences = file_preferences.split('\n')
+		with open('src/config/config.json') as file:
+			datos = json.load(file)
 		array_columns_table =  self.db.columns_list(data,table)
-
+		
 		i = 0
 		for column in array_columns_table:
 			array_content_column = column.split(' ')
-			for row in str(array_file_preferences[1]).split(','):
-				if array_content_column[0] == row:
+			for dat in datos["tbexclude"]:
+				if array_content_column[0] == dat:
 					array_columns_table.pop(i)
 			i = i + 1
 
-		print(array_columns_table)
 		return array_columns_table
+		
 
 	def query_model(self,query,database):
-		file_check = self.file_open('conn.txt','src/config/')
-		array_data_connect_server =  file_check.split("\n")
-		db_ = DB_Manager(array_data_connect_server[0],array_data_connect_server[1],array_data_connect_server[2],database)
+		with open('src/config/config.json') as file:
+			data = json.load(file)
+		db_ = DB_Manager(data["conn"][0],data["conn"][1],data["conn"][2],database)
 		return db_.return_data(query,database)
 
 	def examples(self,lista,option):
@@ -224,3 +216,4 @@ class Generator(File_Manager):
 
 		return data
 		
+
