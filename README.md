@@ -30,3 +30,7 @@ MetaGenerator is released under the MIT License. See LICENSE for more informatio
 
 ### contact
 <small>Juankarlos.0304@gmail.com</small>
+
+
+### Update
+19-sep-2023
