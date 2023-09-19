@@ -344,19 +344,27 @@ class database_dialog ( wx.Dialog ):
 		self.Centre( wx.BOTH )
 
 		self.gen = Generator()
-		file_check = self.gen.file_open('conn.txt','src/config/')
-		array_data_connect_server =  file_check.split("\n")
-		self.txt_hostname.SetValue(array_data_connect_server[0])
-		self.txt_username.SetValue(array_data_connect_server[1])
-		self.txt_password.SetValue(array_data_connect_server[2])
+		
+		with open('src/config/config.json') as data:
+			self.datos = json.load(data)
+
+		self.txt_hostname.SetValue(self.datos['conn'][0])
+		self.txt_username.SetValue(self.datos['conn'][1])
+		self.txt_password.SetValue(self.datos['conn'][2])
 
 		self.btn_save_connection.Bind(wx.EVT_BUTTON,self.save_config)
 		self.btn_test_connection.Bind(wx.EVT_BUTTON,self.test_config)
 	
 	def save_config(self,evt):
+		print(self.datos)
 		try:
-			content = self.txt_hostname.GetValue() + "\n" + self.txt_username.GetValue() + "\n" + self.txt_password.GetValue()
-			self.gen.write_file('conn.txt', content ,'src/config/')
+			self.datos['conn'][0] = self.txt_hostname.GetValue()
+			self.datos['conn'][1] = self.txt_username.GetValue()
+			self.datos['conn'][2] = self.txt_password.GetValue()
+
+			with open('src/config/config.json', 'w') as jf: 
+				json.dump(self.datos, jf)
+
 			wx.MessageBox("Ok, Change", 'Ok', wx.OK | wx.ICON_INFORMATION)
 		except Exception as e:
 			wx.MessageBox(str(e), 'Error', wx.OK | wx.ICON_ERROR)

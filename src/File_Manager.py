@@ -42,21 +42,3 @@ class File_Manager():
 	
 	def file_lists(self):
 		ruta = os.getcwd()
-		
-		#os.listdir(".")
-		#nueva_ruta = os.chdir(ruta + '/diccionary')
-		"""
-		proceso = Popen(['ls'], stdout=PIPE, stderr=PIPE)
-		error_encontrado = proceso.stderr.read()
-		proceso.stderr.close()
-		listado = proceso.stdout.read()
-		proceso.stdout.close()
-		ruta = os.chdir(ruta)
-		"""
-		#ruta = os.chdir(ruta)
-		listado = os.listdir(ruta + "/diccionary")
-		return listado
-"""
-fm = File_Manager()
-print( fm.file_open('conn.txt','src/config/') )
-"""

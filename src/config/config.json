@@ -1,5 +1,1 @@
-{
-	"conn":["localhost","root","carlos",""],
-	"dbexclude":["information_schema","mysql","phpmyadmin","sys","performance_schema"],
-	"tbexclude":["id","created_at","updated_at"]
-}
+{"conn": ["localhost", "root", "password", ""], "dbexclude": ["information_schema", "mysql", "phpmyadmin", "sys", "performance_schema"], "tbexclude": ["id", "created_at", "updated_at"]}
