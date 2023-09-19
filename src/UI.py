@@ -10,6 +10,7 @@
 import wx
 import wx.xrc
 import wx.adv
+import json
 
 from src.Generator import *
 
@@ -452,10 +453,16 @@ class setting_dialog ( wx.Dialog ):
 		self.Centre( wx.BOTH )
 
 		self.gen = Generator()
-		file_check = self.gen.file_open('preferences.txt','src/config/')
-		array_preferences = file_check.split('\n')
-		self.txt_exclude_databases.SetValue(array_preferences[0])
-		self.txt_exclude_columns.SetValue(array_preferences[1])
+		with open("src/config/config.json") as archivo:
+			self.datos = json.load(archivo)
+		x = ''
+		for dato in self.datos['dbexclude']:
+			x = x+dato+','
+		self.txt_exclude_databases.SetValue(x.rstrip(','))
+		x = ''
+		for dato in self.datos['tbexclude']:
+			x = x+dato+','
+		self.txt_exclude_columns.SetValue(x.rstrip(','))
 		
 		self.btn_save_preferences.Bind(wx.EVT_BUTTON,self.save_config)
 
