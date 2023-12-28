@@ -218,12 +218,14 @@ class Generador ( wx.Frame ):
 
 			self.list_preview.DeleteAllItems()
 
+			idx = 0
 			for ar in self.array_data_preview_generate:
-				index = self.list_preview.InsertItem(sys.maxsize, str(ar[0]))
+				index = self.list_preview.InsertItem(idx, str(ar[0]))
 				self.list_preview.SetItem(index, 1, str(ar[1]))
 				self.list_preview.SetItem(index, 2, str(ar[2]))
 				self.list_preview.SetItem(index, 3, str(ar[3]))
 				self.list_preview.SetItem(index, 4, str(ar[4]))
+				idx += 1
 
 	def clean_info(self,event=None):
 		self.list_preview.DeleteAllItems()
@@ -415,13 +417,15 @@ class description_table(wx.Dialog):
 		self.gen.check_connect()
 		rows = self.gen.query_model("SHOW COLUMNS FROM " + table,database)
 
+		idx = 0
 		for ar in rows:
-			index = self.list.InsertItem(sys.maxsize, str(ar[0]))
+			index = self.list.InsertItem(idx, str(ar[0]))
 			self.list.SetItem(index, 1, str(ar[1]))
 			self.list.SetItem(index, 2, str(ar[2]))
 			self.list.SetItem(index, 3, str(ar[3]))
 			self.list.SetItem(index, 4, str(ar[4]))
 			self.list.SetItem(index, 5, str(ar[5]))
+			idx += 1
 
 class setting_dialog ( wx.Dialog ):
 	

@@ -42,3 +42,9 @@ class File_Manager():
 	
 	def file_lists(self):
 		ruta = os.getcwd()
+		return os.listdir(ruta+"/diccionary")
+
+
+ruta = os.getcwd()
+r =  os.listdir(ruta+"/diccionary")
+print(r)
